@@ -1,7 +1,10 @@
+<!-- -->
 <!DOCTYPE html>
 <head>
     <meta charset='utf-8'/>
     <script type='text/javascript' src='jquery.js'></script>
+    <script src='./test.js'></script>
+    <script src='./operation/process_replace_words.js'></script>
 
     <title>Pipeline 可视化界面</title>
     <meta name='author' content='Gupern'/>
@@ -14,11 +17,19 @@
     <ol>
         <li>写出界面,直接从上往下流即可,后期再美观 ✔️</li>
         <li>实现按钮 ✔️</li>
-        <li>实现点击按钮执行python代码</li>
+        <li>点击按钮生成代码 ✔️</li>
+        <li>写脚本将python代码转换成javascript</li>
+        <li>测试</li>
+        <!--
+        <li>processed - date - source_url 去重，增量导入</li>
+        <li>阿里云与aws非实时不冲突互相更新</li>
+        <li>定时crontab, 且判断上次操作是否完成</li>
+        <li>返回服务器中的数据库和collections</li>
         <li>返回控制台内容</li>
+        <li>实现点击按钮执行python代码</li>
         <li>输入框输入命令行代码,返回代码</li>
         <li>实现下拉菜单返回操作选项，返回数据库列表</li>
-    <!-- -->
+        -->
     </ol>
     <!--
     <select>
@@ -29,8 +40,8 @@
     -->
     <div style="float:left">
     <form>
-        source_url：<input type="text" name="source_url">
-        port：<input type="text" name="source_port">
+        source_url：<input id='source_url' value='0.0.0.0' type="text" name="source_url">
+        port：<input id='source_port' value='27017' type="text" name="source_port">
         <button type='source_button'>Connect</button>
     </form>
 
@@ -38,7 +49,7 @@
         <!-- 第一行，标题-->
         <tr>
             <th>Source_DB:</th>
-            <th><input type='text' name='source_db'></th>
+            <th><input type='text' id="source_db" name='source_db' value="admin"></th>
             <th><select>
                 <option value='select db'>select db</option>
             </select></th>
@@ -49,7 +60,7 @@
     <table>
         <tr>
             <th>Source_Collection</th>
-            <th><input type='text' name='source_col'></th>
+            <th><input type='text' id="source_col" name='source_col' value="test"></th>
             <th>
                 <select>
                     <option value='select db'>select collection</option>
@@ -63,8 +74,8 @@
     <div style="padding-left:3px">
 
     <form>
-        target_url：<input type="text" name="target_url">
-        port：<input type="text" name="target_port">
+        target_url：<input type="text" id='target_url' name="target_url" value="localhost">
+        port：<input type="text" id='target_port' name="target_port" value="27017">
         <button type='target_button'>Connect</button>
     </form>
 
@@ -72,7 +83,7 @@
         <!-- 第一行，标题-->
         <tr>
             <th>Target_DB:</th>
-            <th><input type='text' name='target_db'></th>
+            <th><input type='text' id="target_db" name='target_db' value="admin"></th>
             <th><select>
                 <option value='select db'>select db</option>
             </select></th>
@@ -83,7 +94,7 @@
     <table>
         <tr>
             <th>Target_Collection</th>
-            <th><input type='text' name='target_col'></th>
+            <th><input type='text' id="target_col" name='target_col' value="test"></th>
             <th>
                 <select>
                     <option value='select db'>select collection</option>
@@ -95,6 +106,7 @@
     <br />
 
     <!-- here is the item select-->
+    <!--
     </div name = 'item'>
         <p> input/select the item</p>
         <input type='text' name='item'>
@@ -104,10 +116,12 @@
             <option value='select operation'>other</option>
         </select>
     </div>
+    -->
 
 
 
     <!-- here is the operation select-->
+    <!--
     </div name = 'Operation'>
         <p> here is the operation</p>
         <input type='text' name='operation'>
@@ -141,19 +155,15 @@
     <br/>
     <br/>
     <br/>
+    -->
 
     <p id='demo'></p>
     <button onclick="myFunction('Gupern','CEO')">Click me</button>
 
-    <script>
+    <div>
+        <p id='code'>
 
-function fff(){
-    return 888
-}
-function myFunction(name,job) {
-    alert('Welcome ' + name + ', the ' + job);
-    document.getElementById('demo').innerHTML=fff()
-}
-    </script>
-
+        </p>
+    </div>
+    <button onclick="operation_test()">operation test</button>
 </body>
