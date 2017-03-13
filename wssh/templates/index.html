@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>DCPS</title>
+        <meta name='author' content='Gupern'/>
+        <meta name='description' content='This is version 0.2'/>
+        <link href="{{url_for('static', filename='bootstrap.min.css')}}" rel="stylesheet" />
+        <link href="{{url_for('static', filename='style.css')}}" rel="stylesheet" />
+    </head>
+
+    <body>
+        <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="brand" href="#">Data Clean Pipeline System</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <!-- Connection form -->
+
+            <form id="connect" class="form-horizontal">
+                <fieldset>
+                    <legend>About the Author</legend>
+                    <p> Created by <b>Gupern</b>, who is the Data Engineer of <b>CRAWWW</b> Company.</p>
+                    <p>采用敏捷开发方法，先怼出核心功能<p>
+                    <ol>
+                        <li>写出界面,直接从上往下流即可,后期再美观 ✔️</li>
+                        <li>实现按钮 ✔️</li>
+                        <li>点击按钮生成代码 ✔️</li>
+                        <li>写脚本将python代码转换成javascript --- 双引号问题 ✔️</li>
+                        <li>wssh搭建终端 ✔️</li>
+                        <li>安装xcode ✔️</li>
+                        <li>安装依赖包 ✔️</li>
+                        <li>整合页面 将wssh整合到页面 ✔️</li>
+                        <li>加代码框</li>
+                        <li>测试</li>
+                        <!--
+                        <li>processed - date - source_url 去重，增量导入</li>
+                        <li>阿里云与aws非实时不冲突互相更新</li>
+                        <li>定时crontab, 且判断上次操作是否完成</li>
+                        <li>返回服务器中的数据库和collections</li>
+                        <li>返回控制台内容</li>
+                        <li>实现点击按钮执行python代码</li>
+                        <li>输入框输入命令行代码,返回代码</li>
+                        <li>实现下拉菜单返回操作选项，返回数据库列表</li>
+                        -->
+                    </ol>
+
+                    <br>
+
+                    <legend>Connect to a remote SSH server</legend>
+
+                    <div class="control-group">
+                        <label class="control-label">
+                            Destination
+                        </label>
+                        <div class="controls">
+                            <input type="text" id="username"
+                                class="input-small"
+                                placeholder="root" />
+                            <div class="input-prepend">
+                                <span class="add-on">@</span><input
+                                    type="text"
+                                    id="hostname"
+                                    class="input-large"
+                                    placeholder="localhost" />
+                                <span class="add-on">port</span><input
+                                    type="text"
+                                    id="portnumber"
+                                    class="input-small"
+                                    value=22 />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">
+                            Authentication method
+                        </label>
+
+                        <div class="controls">
+                            <label class="radio">
+                                <input type="radio" name="authentication_method"
+                                    value="password" checked />
+                                    Password
+                            </label>
+
+                            <label class="radio">
+                                <input type="radio" name="authentication_method"
+                                    value="private_key" />
+                                    Private Key
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="control-group" id="password_authentication">
+                        <label class="control-label">
+                            Password
+                        </label>
+                        <div class="controls">
+                            <input type="password" id="password"
+                                class="input-large" />
+                        </div>
+                    </div>
+
+                    <div id="private_key_authentication">
+                        <div class="control-group">
+                            <label class="control-label">
+                                Private Key
+                            </label>
+                            <div class="controls">
+                                <textarea id="private_key" rows="6"
+                                    class="input-xxlarge"></textarea>
+                                <p class="help-block">
+                                    Copy &amp; Paste your SSH private from
+                                    <code>~/.ssh/id_rsa</code> or
+                                    <code>~/.ssh/id_dsa</code>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">
+                                Key Passphrase
+                            </label>
+                            <div class="controls">
+                                <input type="password" id="key_passphrase"
+                                    class="input-large" />
+                                <p class="help-block">
+                                    Enter your private key passphrase if it
+                                    is encrypted. Leave empty otherwise.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">
+                            Command
+                        </label>
+                        <div class="controls">
+                            <input type="text" id="command" class="input-large" />
+                            <p class="help-block">
+                                Enter command to be executed or
+                                empty for interactive.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            Connect
+                        </button>
+                    </div>
+
+                </fieldset>
+            </form>
+
+            <div id="term">
+            </div>
+            <!-- 添加生成代码的块 -->
+
+            <form id="connect" class="form-horizontal">
+                <fieldset>
+                    <legend>Generate the configuation code</legend>
+
+
+                    <div class="control-group">
+                        <label class="control-label">
+                            Source
+                        </label>
+                        <div class="controls">
+                            <div class="input-prepend">
+                                <span class="add-on">URL</span><input
+                                    type="text"
+                                    id="source_url"
+                                    class="input-small"
+                                    value=localhost />
+                                <span class="add-on">port</span><input
+                                    type="text"
+                                    id="source_port"
+                                    class="input-small"
+                                    value=27017 />
+                                <span class="add-on">database</span><input
+                                    type="text"
+                                    id="source_db"
+                                    class="input-small"
+                                    value="admin" />
+                                <span class="add-on">collection</span><input
+                                    type="text"
+                                    id="source_col"
+                                    class="input-small"
+                                    placeholder="source_col" />
+                            </div>
+                            <button type='source_button' class="btn btn-primary">Connect</button>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">
+                            Target
+                        </label>
+                        <div class="controls">
+                            <div class="input-prepend">
+                                <span class="add-on">URL</span><input
+                                    type="text"
+                                    id="target_url"
+                                    class="input-small"
+                                    value=localhost />
+                                <span class="add-on">port</span><input
+                                    type="text"
+                                    id="target_port"
+                                    class="input-small"
+                                    value=27017 />
+                                <span class="add-on">database</span><input
+                                    type="text"
+                                    id="target_db"
+                                    class="input-small"
+                                    value="admin" />
+                                <span class="add-on">collection</span><input
+                                    type="text"
+                                    id="target_col"
+                                    class="input-small"
+                                    placeholder="target_col" />
+                            </div>
+                            <button type='target_button' class="btn btn-primary">Connect</button>
+                        </div>
+                    </div>
+                    <!-- here is the item select-->
+                    <!--
+                    </div name = 'item'>
+                        <p> input/select the item</p>
+                        <input type='text' name='item'>
+                        <select>
+                            <option value='select operation'>name</option>
+                            <option value='select operation'>_id</option>
+                            <option value='select operation'>other</option>
+                        </select>
+                    </div>
+                    -->
+
+
+
+                    <!-- here is the operation select-->
+                    <!--
+                    </div name = 'Operation'>
+                        <p> here is the operation</p>
+                        <input type='text' name='operation'>
+                        <select>
+                            <option value='select operation'>替换文字，从A字典替换为B</option>
+                            <option value='select operation'>过滤数据，含有A字典关键字的数据删去</option>
+                            <option value='select operation'>过滤数据，不含有A字典关键字的数据删去</option>
+                        </select>
+                    </div>
+
+                    </div name = 'Dic_A'>
+                        <p> here is the dict A</p>
+                        <input type='text' name='dict a'>
+                        <select>
+                            <option value='select operation'>替换文字集</option>
+                            <option value='select operation'>过滤数据含有则删去集</option>
+                            <option value='select operation'>过滤数据不含有则删去集</option>
+                        </select>
+
+                    </div>
+                    </div name = 'Dic_B'>
+                        <p> here is the dict B</p>
+                        <input type='text' name='dict b'>
+                        <select>
+                            <option value='select operation'>替换文字集</option>
+                            <option value='select operation'>过滤数据含有则删去集</option>
+                            <option value='select operation'>过滤数据不含有则删去集</option>
+                        </select>
+
+                    </div>
+                    <br/>
+                    <br/>
+                    <br/>
+                    -->
+
+                    <p id='demo'> </p>
+
+                    <button class="btn btn-primary" onclick="myFunction('Gupern','CEO')">Click me</button>
+
+                    <div>
+                        <p id='code'>
+
+                        </p>
+                    </div>
+                    <button class="btn btn-primary" onclick="operation_test()">operation test</button>
+
+                </fieldset>
+            </form>
+
+        </div>
+
+        <!-- 添加js文件 -->
+        <script type="application/javascript" src="{{url_for('static', filename='test.js')}}">
+        </script>
+        <script type="application/javascript" src="{{url_for('static', filename='operation/process_replace_words.js')}}">
+        </script>
+
+        <script type="application/javascript" src="{{url_for('static', filename='jquery.min.js')}}">
+        </script>
+        <script type="application/javascript" src="{{url_for('static', filename='term.js')}}">
+        </script>
+        <script type="application/javascript" src="{{url_for('static', filename='wssh.js')}}">
+        </script>
+        <script type="application/javascript">
+            function openTerminal(options) {
+                var client = new WSSHClient();
+                var term = new Terminal(80, 24, function(key) {
+                    client.send(key);
+                });
+                term.open();
+                $('.terminal').detach().appendTo('#term');
+                term.resize(80, 24);
+                term.write('Connecting...');
+                client.connect($.extend(options, {
+                    onError: function(error) {
+                        term.write('Error: ' + error + '\r\n');
+                    },
+                    onConnect: function() {
+                        // Erase our connecting message
+                        term.write('\r');
+                    },
+                    onClose: function() {
+                        term.write('Connection Reset By Peer');
+                    },
+                    onData: function(data) {
+                        term.write(data);
+                    }
+                }));
+            }
+        </script>
+
+        <script type='application/javascript'>
+            $(document).ready(function() {
+                $('#ssh').hide();
+                $('#private_key_authentication', '#connect').hide();
+
+                $('input:radio[value=private_key]', '#connect').click(
+                    function() {
+                        $('#password_authentication').hide();
+                        $('#private_key_authentication').show();
+                    }
+                );
+
+                $('input:radio[value=password]', '#connect').click(
+                    function() {
+                        $('#password_authentication').show();
+                        $('#private_key_authentication').hide();
+                    }
+                );
+
+                $('#connect').submit(function(ev) {
+                    ev.preventDefault();
+
+                    function validate(fields) {
+                        var success = true;
+                        fields.forEach(function(field) {
+                            if (!field.val()) {
+                                field.closest('.control-group')
+                                    .addClass('error');
+                                success = false;
+                            }
+                        });
+                        return success;
+                    }
+
+                    // Clear errors
+                    $('.error').removeClass('error');
+
+                    var username = $('input:text#username');
+                    var hostname = $('input:text#hostname');
+                    var portnumber = $('input:text#portnumber');
+                    var command = $('input:text#command');
+
+                    var authentication = $(
+                        'input[name=authentication_method]:checked',
+                        '#connect').val();
+                    var options = {
+                        username: username.val(),
+                        hostname: hostname.val(),
+                        command: command.val(),
+                        authentication_method: authentication
+                    };
+
+                    var port = parseInt(portnumber.val())
+                    if (port > 0 && port < 65535) {
+                        $.extend(options, {port: port});
+                    } else {
+                        $.extend(options, {port: 22});
+                    }
+
+                    if (authentication == 'password') {
+                        var password = $('input:password#password');
+                        if (!validate([username, hostname, password]))
+                            return false;
+                        $.extend(options, {password: password.val()});
+                    } else if (authentication == 'private_key') {
+                        var private_key = $('textarea#private_key');
+                        if (!validate([username, hostname, private_key]))
+                            return false;
+                        $.extend(options, {private_key: private_key.val()});
+                        var key_passphrase = $('input:password#key_passphrase');
+                        if (key_passphrase.val()) {
+                            $.extend(options,
+                                {key_passphrase: key_passphrase.val()});
+                        }
+                    }
+
+                    $('#connect').hide();
+                    $('#ssh').show();
+                    openTerminal(options);
+                });
+            });
+        </script>
+    </body>
+</html>

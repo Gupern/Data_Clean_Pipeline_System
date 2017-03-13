@@ -6,7 +6,7 @@
 - [x] 写出界面 已完成初始按钮和文本框，等后面完成功能了再优化
 - [x] 点击按钮执行python代码的功能 （替换为点击按钮生成python代码的功能）
 - [x] 下拉列表---select
-- [ ] 嵌入ssh链接终端，采用wssh
+- [x] 嵌入ssh链接终端，采用wssh
 
 
 
@@ -24,6 +24,34 @@
 判断上次操作是否完成，若未完成，则放入等待队列，等完成后再唤醒；
 添加提高优先级功能，将现在进程阻塞，先完成紧急的数据导入；
 调度算法实现。
+
+> 2017-03-13 使用了wssh的代码，更改协议为MIT协议
+## wssh 项目地址
+https://github.com/aluzzardi/wssh/
+
+#### 安装命令command:
+install dependence package
+'pip install gevent gevent-websocket paramiko flask'
+
+install wssh
+'git clone https://github.com/aluzzardi/wssh.git'
+'cd wssh'
+'python setup.py install'
+
+#### start wssh service
+wsshd
+
+open browser and enter 0.0.0.0:5000
+
+# Question
+---
+## how to modify the wssh?
+#### before install 
+modify the wssh/templates/index.html
+#### after install
+modify /usr/local/lib/python2.7/site-packages/wssh-0.1.0-py2.7.egg/wssh/templates/index.html
+(or other python address)
+
 
 ## Data_Clean_Pipeline_System 简介
 This is the system for filter the data from crawler and put them into NoSQL

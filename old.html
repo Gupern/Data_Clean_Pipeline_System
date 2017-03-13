@@ -1,0 +1,178 @@
+<!-- -->
+<!DOCTYPE html>
+<head>
+    <meta charset='utf-8'/>
+    <script type='text/javascript' src='jquery.js'></script>
+    <script src='./test.js'></script>
+    <script src='./operation/process_replace_words.js'></script>
+
+    <title>Pipeline 可视化界面</title>
+    <meta name='author' content='Gupern'/>
+    <meta name='description' content='This is version 0.1'/>
+
+</head>
+<body>
+    <h1>Pipeline System for Automatically Operation and Maintenance</h1>
+    <p>采用敏捷开发方法，先怼出核心功能<p>
+    <ol>
+        <li>写出界面,直接从上往下流即可,后期再美观 ✔️</li>
+        <li>实现按钮 ✔️</li>
+        <li>点击按钮生成代码 ✔️</li>
+        <li>写脚本将python代码转换成javascript --- 双引号问题 ✔️</li>
+
+        <li>wssh搭建终端 ✔️</li>
+        <li>    安装xcode ✔️</li>
+        <li>    安装依赖包 ✔️</li>
+        <li>    整合页面 将wssh整合到页面</li>
+        <li>看懂wssh代码</li>
+        
+        <li>修改代码</li>
+        <li>    加代码框</li>
+        <li>测试</li>
+        <!--
+        <li>processed - date - source_url 去重，增量导入</li>
+        <li>阿里云与aws非实时不冲突互相更新</li>
+        <li>定时crontab, 且判断上次操作是否完成</li>
+        <li>返回服务器中的数据库和collections</li>
+        <li>返回控制台内容</li>
+        <li>实现点击按钮执行python代码</li>
+        <li>输入框输入命令行代码,返回代码</li>
+        <li>实现下拉菜单返回操作选项，返回数据库列表</li>
+        -->
+    </ol>
+    <!--
+    <select>
+        <option value = 'select db'>DB</option>
+        <option value = 'select collections'>Col</option>
+        <option value = 'opel'>Opel</option>
+    </select>
+    -->
+    <div style="float:left">
+    <form>
+        source_url：<input id='source_url' value='0.0.0.0' type="text" name="source_url">
+        port：<input id='source_port' value='27017' type="text" name="source_port">
+        <button type='source_button'>Connect</button>
+    </form>
+
+    <table border='0'>
+        <!-- 第一行，标题-->
+        <tr>
+            <th>Source_DB:</th>
+            <th><input type='text' id="source_db" name='source_db' value="admin"></th>
+            <th><select>
+                <option value='select db'>select db</option>
+            </select></th>
+        </tr>
+    </table>
+
+
+    <table>
+        <tr>
+            <th>Source_Collection</th>
+            <th><input type='text' id="source_col" name='source_col' value="test"></th>
+            <th>
+                <select>
+                    <option value='select db'>select collection</option>
+                </select>
+            </th>
+        </tr>
+    </table>
+    </div>
+
+
+    <div style="padding-left:3px">
+
+    <form>
+        target_url：<input type="text" id='target_url' name="target_url" value="localhost">
+        port：<input type="text" id='target_port' name="target_port" value="27017">
+        <button type='target_button'>Connect</button>
+    </form>
+
+    <table border='0'>
+        <!-- 第一行，标题-->
+        <tr>
+            <th>Target_DB:</th>
+            <th><input type='text' id="target_db" name='target_db' value="admin"></th>
+            <th><select>
+                <option value='select db'>select db</option>
+            </select></th>
+        </tr>
+    </table>
+
+
+    <table>
+        <tr>
+            <th>Target_Collection</th>
+            <th><input type='text' id="target_col" name='target_col' value="test"></th>
+            <th>
+                <select>
+                    <option value='select db'>select collection</option>
+                </select>
+            </th>
+        </tr>
+    </table>
+
+    <br />
+
+    <!-- here is the item select-->
+    <!--
+    </div name = 'item'>
+        <p> input/select the item</p>
+        <input type='text' name='item'>
+        <select>
+            <option value='select operation'>name</option>
+            <option value='select operation'>_id</option>
+            <option value='select operation'>other</option>
+        </select>
+    </div>
+    -->
+
+
+
+    <!-- here is the operation select-->
+    <!--
+    </div name = 'Operation'>
+        <p> here is the operation</p>
+        <input type='text' name='operation'>
+        <select>
+            <option value='select operation'>替换文字，从A字典替换为B</option>
+            <option value='select operation'>过滤数据，含有A字典关键字的数据删去</option>
+            <option value='select operation'>过滤数据，不含有A字典关键字的数据删去</option>
+        </select>
+    </div>
+
+    </div name = 'Dic_A'>
+        <p> here is the dict A</p>
+        <input type='text' name='dict a'>
+        <select>
+            <option value='select operation'>替换文字集</option>
+            <option value='select operation'>过滤数据含有则删去集</option>
+            <option value='select operation'>过滤数据不含有则删去集</option>
+        </select>
+
+    </div>
+    </div name = 'Dic_B'>
+        <p> here is the dict B</p>
+        <input type='text' name='dict b'>
+        <select>
+            <option value='select operation'>替换文字集</option>
+            <option value='select operation'>过滤数据含有则删去集</option>
+            <option value='select operation'>过滤数据不含有则删去集</option>
+        </select>
+
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    -->
+
+    <p id='demo'></p>
+    <button onclick="myFunction('Gupern','CEO')">Click me</button>
+
+    <div>
+        <p id='code'>
+
+        </p>
+    </div>
+    <button onclick="operation_test()">operation test</button>
+</body>
