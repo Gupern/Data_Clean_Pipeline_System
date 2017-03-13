@@ -27,26 +27,15 @@
                     <p> Created by <b>Gupern</b>, who is the Data Engineer of <b>CRAWWW</b> Company.</p>
                     <p>采用敏捷开发方法，先怼出核心功能<p>
                     <ol>
-                        <li>写出界面,直接从上往下流即可,后期再美观 ✔️</li>
-                        <li>实现按钮 ✔️</li>
-                        <li>点击按钮生成代码 ✔️</li>
-                        <li>写脚本将python代码转换成javascript --- 双引号问题 ✔️</li>
-                        <li>wssh搭建终端 ✔️</li>
-                        <li>安装xcode ✔️</li>
-                        <li>安装依赖包 ✔️</li>
-                        <li>整合页面 将wssh整合到页面 ✔️</li>
-                        <li>加代码框</li>
-                        <li>测试</li>
-                        <!--
-                        <li>processed - date - source_url 去重，增量导入</li>
-                        <li>阿里云与aws非实时不冲突互相更新</li>
-                        <li>定时crontab, 且判断上次操作是否完成</li>
+                        <li>不需要转换js代码，直接显示python代码</li>
+                        <li>修改operation的py代码</li>
+                        <li>添加操作</li>
+                        <li>逻辑缩进</li>
+                        <li>自动读取操作列表<li>
                         <li>返回服务器中的数据库和collections</li>
-                        <li>返回控制台内容</li>
-                        <li>实现点击按钮执行python代码</li>
-                        <li>输入框输入命令行代码,返回代码</li>
                         <li>实现下拉菜单返回操作选项，返回数据库列表</li>
-                        -->
+                        <li>processed - date - source_url 去重，增量导入</li>
+                        <li>定时crontab, 且判断上次操作是否完成</li>
                     </ol>
 
                     <br>
@@ -283,17 +272,18 @@
 
                     <p id='demo'> </p>
 
-                    <button class="btn btn-primary" onclick="myFunction('Gupern','CEO')">Click me</button>
 
                     <div>
-                        <p id='code'>
-
-                        </p>
+                        <textarea rows='10' cols='150'style="width:98%;height:200px;" id='code'>
+                        </textarea>
                     </div>
-                    <button class="btn btn-primary" onclick="operation_test()">operation test</button>
 
                 </fieldset>
             </form>
+
+            <!-- 放到form外面，否则点击按钮后会刷新页面 -->
+            <button class="btn btn-primary" onclick="myFunction('Gupern','CEO')">Click me</button>
+            <button class="btn btn-primary" onclick="operation_test()">operation test</button>
 
         </div>
 

@@ -21,13 +21,10 @@ This is the system for filter the data from crawler and put them into NoSQL
 - [x] 点击按钮执行python代码的功能 （替换为点击按钮生成python代码的功能）
 - [x] 下拉列表---select
 - [x] 嵌入ssh链接终端，采用wssh
-
-- [ ] 返回页面输出结果（太难实现，等生成代码实现再说）
-- [ ] 填写命令并传入执行
+- [ ] 添加代码框
 - [ ] 返回数据库、collections和字段名
 - [ ] 返回文件夹下的字典名
 - [ ] 拖进字典上传到文件夹（自动重命名）
-- [ ] 执行导入到目标数据库的代码
 
 后面慢慢优化，添加定时功能等等
 

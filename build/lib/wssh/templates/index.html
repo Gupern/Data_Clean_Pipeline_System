@@ -32,11 +32,11 @@
                         <li>点击按钮生成代码 ✔️</li>
                         <li>写脚本将python代码转换成javascript --- 双引号问题 ✔️</li>
                         <li>wssh搭建终端 ✔️</li>
-                        <li>    安装xcode ✔️</li>
-                        <li>    安装依赖包 ✔️</li>
-                        <li>    整合页面 将wssh整合到页面 ✔️</li>
-                        <li>修改代码</li>
-                        <li>    加代码框</li>
+                        <li>安装xcode ✔️</li>
+                        <li>安装依赖包 ✔️</li>
+                        <li>整合页面 将wssh整合到页面 ✔️</li>
+                        <li>加代码框 ✔️</li>
+                        <li>不需要转换js代码，直接显示python代码</li>
                         <li>测试</li>
                         <!--
                         <li>processed - date - source_url 去重，增量导入</li>
@@ -284,17 +284,18 @@
 
                     <p id='demo'> </p>
 
-                    <button class="btn btn-primary" onclick="myFunction('Gupern','CEO')">Click me</button>
 
                     <div>
-                        <p id='code'>
-
-                        </p>
+                        <textarea rows='10' cols='150'style="width:98%;height:200px;" id='code'>
+                        </textarea>
                     </div>
-                    <button class="btn btn-primary" onclick="operation_test()">operation test</button>
 
                 </fieldset>
             </form>
+
+            <!-- 放到form外面，否则点击按钮后会刷新页面 -->
+            <button class="btn btn-primary" onclick="myFunction('Gupern','CEO')">Click me</button>
+            <button class="btn btn-primary" onclick="operation_test()">operation test</button>
 
         </div>
 

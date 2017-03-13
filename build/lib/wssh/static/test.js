@@ -7,9 +7,6 @@ function fff(){
 function myFunction(name,job) {
     document.getElementById('demo').innerHTML=connect_url()
 }
-function myFunction1(name,job) {
-    document.getElementById('demo').innerHTML='aaaaaaaaaaaaaa'
-}
 
 
 function connect_url() {
