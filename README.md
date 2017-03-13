@@ -1,5 +1,3 @@
-空格的html表示&nbsp;
-
 ### 细化步骤
 采用敏捷开发方法，先怼出核心功能：
 
@@ -19,27 +17,28 @@
 
 后面慢慢优化，添加定时功能等等
 
-定时执行代码crontab xxx； 分 时 天 月 星期几 执行命令；scp 安全性问题
+定时执行代码`crontab xxx`； 分 时 天 月 星期几 执行命令；scp 安全性问题
 
 判断上次操作是否完成，若未完成，则放入等待队列，等完成后再唤醒；
 添加提高优先级功能，将现在进程阻塞，先完成紧急的数据导入；
 调度算法实现。
 
 > 2017-03-13 使用了wssh的代码，更改协议为MIT协议
+
 ## wssh 项目地址
 https://github.com/aluzzardi/wssh/
 
 #### 安装命令command:
 install dependence package
-'pip install gevent gevent-websocket paramiko flask'
+`pip install gevent gevent-websocket paramiko flask`
 
 install wssh
-'git clone https://github.com/aluzzardi/wssh.git'
-'cd wssh'
-'python setup.py install'
+`git clone https://github.com/aluzzardi/wssh.git`
+`cd wssh`
+`python setup.py install`
 
 #### start wssh service
-wsshd
+`wsshd`
 
 open browser and enter 0.0.0.0:5000
 
@@ -71,6 +70,6 @@ This is the system for filter the data from crawler and put them into NoSQL
 - 可选择源数据库地址，目标数据库地址，以及具体哪个collection
 
 - pipeline可视化流程
-
-
+# Note
+空格在html的表示代码为：`&nbsp;`
 =======
