@@ -25,14 +25,15 @@
 
 > 2017-03-13 使用了wssh的代码，更改协议为MIT协议
 
-## wssh 项目地址
-https://github.com/aluzzardi/wssh/
+## [wssh 项目地址](https://github.com/aluzzardi/wssh/)
 
-#### 安装命令command:
-install dependence package
+#### 安装命令 Install Command
+**install dependence package**
+
 `pip install gevent gevent-websocket paramiko flask`
 
-install wssh
+**install wssh**
+
 `git clone https://github.com/aluzzardi/wssh.git`
 `cd wssh`
 `python setup.py install`
@@ -40,16 +41,16 @@ install wssh
 #### start wssh service
 `wsshd`
 
-open browser and enter 0.0.0.0:5000
+#### open browser and enter address
+default `0.0.0.0:5000`
 
 # Question
----
-## how to modify the wssh?
-#### before install 
-modify the wssh/templates/index.html
-#### after install
-modify /usr/local/lib/python2.7/site-packages/wssh-0.1.0-py2.7.egg/wssh/templates/index.html
-(or other python address)
+
+#### how to modify the wssh?
+**before install**
+modify the `wssh/templates/index.html`
+**after install**
+modify `/usr/local/lib/python2.7/site-packages/wssh-0.1.0-py2.7.egg/wssh/templates/index.html`(or other python address)
 
 
 ## Data_Clean_Pipeline_System 简介
@@ -70,6 +71,7 @@ This is the system for filter the data from crawler and put them into NoSQL
 - 可选择源数据库地址，目标数据库地址，以及具体哪个collection
 
 - pipeline可视化流程
-# Note
+
+## Note
 空格在html的表示代码为：`&nbsp;`
 =======
