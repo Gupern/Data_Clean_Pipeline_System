@@ -27,26 +27,19 @@
                     <p> Created by <b>Gupern</b>, who is the Data Engineer of <b>CRAWWW</b> Company.</p>
                     <p>采用敏捷开发方法，先怼出核心功能<p>
                     <ol>
-                        <li>写出界面,直接从上往下流即可,后期再美观 ✔️</li>
-                        <li>实现按钮 ✔️</li>
-                        <li>点击按钮生成代码 ✔️</li>
-                        <li>写脚本将python代码转换成javascript --- 双引号问题 ✔️</li>
-                        <li>wssh搭建终端 ✔️</li>
-                        <li>安装xcode ✔️</li>
-                        <li>安装依赖包 ✔️</li>
-                        <li>整合页面 将wssh整合到页面 ✔️</li>
-                        <li>加代码框 ✔️</li>
-                        <li>不需要转换js代码，直接显示python代码</li>
-                        <li>测试</li>
+                        <li>不需要转换js代码，直接显示python代码 ✔️ -- 通过写js脚本替换回来</li>
+                        <li>自动读取本地操作列表</li>
+                        <li>按connect后alert返回结果</li>
                         <!--
-                        <li>processed - date - source_url 去重，增量导入</li>
-                        <li>阿里云与aws非实时不冲突互相更新</li>
-                        <li>定时crontab, 且判断上次操作是否完成</li>
+                        <li>按+号后添加一行</li>
+                        <li>添加键值映射功能</li>
+                        <li>修改operation的py代码</li>
+                        <li>添加操作</li>
+                        <li>逻辑缩进</li>
                         <li>返回服务器中的数据库和collections</li>
-                        <li>返回控制台内容</li>
-                        <li>实现点击按钮执行python代码</li>
-                        <li>输入框输入命令行代码,返回代码</li>
                         <li>实现下拉菜单返回操作选项，返回数据库列表</li>
+                        <li>processed - date - source_url 去重，增量导入</li>
+                        <li>定时crontab, 且判断上次操作是否完成</li>
                         -->
                     </ol>
 
@@ -185,18 +178,27 @@
                                     id="source_port"
                                     class="input-small"
                                     value=27017 />
-                                <span class="add-on">database</span><input
+                                <span class="add-on">db</span><input
                                     type="text"
                                     id="source_db"
                                     class="input-small"
                                     value="admin" />
-                                <span class="add-on">collection</span><input
+                                <span class="add-on">col</span><input
                                     type="text"
                                     id="source_col"
                                     class="input-small"
-                                    placeholder="source_col" />
+                                    placeholder="Collection" />
+                                <span class="add-on">user</span><input
+                                    type="text"
+                                    id="source_username"
+                                    class="input-small"
+                                    placeholder="User" />
+                                <span class="add-on">pwd</span><input
+                                    type="text"
+                                    id="source_password"
+                                    class="input-small"
+                                    placeholder="Password" />
                             </div>
-                            <button type='source_button' class="btn btn-primary">Connect</button>
                         </div>
                     </div>
 
@@ -216,18 +218,27 @@
                                     id="target_port"
                                     class="input-small"
                                     value=27017 />
-                                <span class="add-on">database</span><input
+                                <span class="add-on">db</span><input
                                     type="text"
                                     id="target_db"
                                     class="input-small"
                                     value="admin" />
-                                <span class="add-on">collection</span><input
+                                <span class="add-on">col</span><input
                                     type="text"
                                     id="target_col"
                                     class="input-small"
-                                    placeholder="target_col" />
+                                    placeholder="Collection" />
+                                <span class="add-on">user</span><input
+                                    type="text"
+                                    id="target_username"
+                                    class="input-small"
+                                    placeholder="User" />
+                                <span class="add-on">psw</span><input
+                                    type="text"
+                                    id="target_password"
+                                    class="input-small"
+                                    placeholder="Password" />
                             </div>
-                            <button type='target_button' class="btn btn-primary">Connect</button>
                         </div>
                     </div>
                     <!-- here is the item select-->
@@ -282,11 +293,13 @@
                     <br/>
                     -->
 
-                    <p id='demo'> </p>
-
+                    <div>
+                        <textarea rows='10' cols='150'style="width:98%;height:200px;" id='code1'>
+                        </textarea>
+                    </div>
 
                     <div>
-                        <textarea rows='10' cols='150'style="width:98%;height:200px;" id='code'>
+                        <textarea rows='10' cols='150'style="width:98%;height:200px;" id='code2'>
                         </textarea>
                     </div>
 

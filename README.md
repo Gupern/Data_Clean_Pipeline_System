@@ -58,6 +58,9 @@ default `0.0.0.0:5000`
 
 ## Note
 
+#### how to display change line character in textarea?
+use \r\n
+
 #### how to add a space entity in html?
 
 空格在html的表示代码为：`&nbsp;`
