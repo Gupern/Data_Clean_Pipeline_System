@@ -2,15 +2,15 @@ from setuptools import setup
 
 
 setup(
-    name='wssh',
+    name='dcps',
     version='0.1.0',
-    author='Andrea Luzzardi <aluzzardi@gmail.com>',
+    author='Gupern <guperner@hotmail.com>',
     packages=[
-        'wssh'
+        'dcps'
         ],
     scripts=[
-        'bin/wssh',
-        'bin/wsshd'
+        'bin/dcps',
+        'bin/dcpsd'
         ],
     package_data={'': ['static/*', 'templates/*']},
     include_package_data=True,

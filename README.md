@@ -21,12 +21,30 @@ This is the system for filter the data from crawler and put them into NoSQL
 - [x] 点击按钮执行python代码的功能 （替换为点击按钮生成python代码的功能）
 - [x] 下拉列表---select
 - [x] 嵌入ssh链接终端，采用wssh
-- [ ] 添加代码框
+- [x] 添加代码框
 - [ ] 返回数据库、collections和字段名
-- [ ] 返回文件夹下的字典名
+        pymongo 获取所有的fields(由于wssh是flask程序，在flask中增加获字段的api)
+        写api(返回fields即可，后面扩展为返回dbname，colname)
+        使用ajax请求，并返回到select中
+- [x] 选择本地operation文件
 - [ ] 拖进字典上传到文件夹（自动重命名）
 
+ajax:修改wssh的方法，添加返回链接结果的api</li>
+写添加map的前端</li>
+按+号后添加一行</li>
+添加键值映射功能</li>
+修改operation的py代码</li>
+添加操作</li>
+逻辑缩进</li>
+返回服务器中的数据库和collections</li>
+整合DataX</li>
+实现下拉菜单返回操作选项，返回数据库列表</li>
+processed - date - source_url 去重，增量导入</li>
+定时crontab, 且判断上次操作是否完成</li>
+
+
 后面慢慢优化，添加定时功能等等
+整合DataX
 
 定时执行代码`crontab xxx`； 分 时 天 月 星期几 执行命令；scp 安全性问题
 

@@ -6,7 +6,7 @@ monkey.patch_all()
 from flask import Flask, request, abort, render_template
 from werkzeug.exceptions import BadRequest
 import gevent
-import wssh
+import dcps
 
 
 app = Flask(__name__)
@@ -17,7 +17,7 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/wssh/<hostname>/<username>')
+@app.route('/dcps/<hostname>/<username>')
 def connect(hostname, username):
     app.logger.debug('{remote} -> {username}@{hostname}: {command}'.format(
             remote=request.remote_addr,
@@ -32,7 +32,7 @@ def connect(hostname, username):
         app.logger.error('Abort: Request is not WebSocket upgradable')
         raise BadRequest()
 
-    bridge = wssh.WSSHBridge(request.environ['wsgi.websocket'])
+    bridge = dcps.DCPSBridge(request.environ['wsgi.websocket'])
     try:
         bridge.open(
             hostname=hostname,
@@ -41,7 +41,7 @@ def connect(hostname, username):
             port=int(request.args.get('port')),
             private_key=request.args.get('private_key'),
             key_passphrase=request.args.get('key_passphrase'),
-            allow_agent=app.config.get('WSSH_ALLOW_SSH_AGENT', False))
+            allow_agent=app.config.get('DCPS_ALLOW_SSH_AGENT', False))
     except Exception as e:
         app.logger.exception('Error while connecting to {0}: {1}'.format(
             hostname, e.message))
@@ -66,12 +66,12 @@ if __name__ == '__main__':
     from jinja2 import FileSystemLoader
     import os
 
-    root_path = os.path.dirname(wssh.__file__)
+    root_path = os.path.dirname(dcps.__file__)
     app.jinja_loader = FileSystemLoader(os.path.join(root_path, 'templates'))
     app.static_folder = os.path.join(root_path, 'static')
 
     parser = argparse.ArgumentParser(
-        description='wsshd - SSH Over WebSockets Daemon')
+        description='dcpsd - SSH Over WebSockets Daemon')
 
     parser.add_argument('--port', '-p',
         type=int,
@@ -85,14 +85,14 @@ if __name__ == '__main__':
     parser.add_argument('--allow-agent', '-A',
         action='store_true',
         default=False,
-        help='Allow the use of the local (where wsshd is running) ' \
+        help='Allow the use of the local (where dcpsd is running) ' \
             'ssh-agent to authenticate. Dangerous.')
 
     args = parser.parse_args()
 
-    app.config['WSSH_ALLOW_SSH_AGENT'] = args.allow_agent
+    app.config['DCPS_ALLOW_SSH_AGENT'] = args.allow_agent
 
-    agent = 'wsshd/{0}'.format(wssh.__version__)
+    agent = 'dcpsd/{0}'.format(dcps.__version__)
 
     print '{0} running on {1}:{2}'.format(agent, args.host, args.port)
 

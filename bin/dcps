@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 if __name__ == '__main__':
-    from wssh import client
+    from dcps import client
 
     import os
     import sys
@@ -10,14 +10,14 @@ if __name__ == '__main__':
     import urllib2
 
     parser = argparse.ArgumentParser(
-        description='wssh - SSH Over WebSockets Client')
+        description='dcps - SSH Over WebSockets Client')
 
     parser.add_argument('--host', '-H',
-        help='WSSH server host (default: 127.0.0.1)',
+        help='DCPS server host (default: 127.0.0.1)',
         default='127.0.0.1')
 
     parser.add_argument('--port', '-P',
-        help='WSSH server port (default: 5000)',
+        help='DCPS server port (default: 5000)',
         type=int,
         default=5000)
 
@@ -99,7 +99,7 @@ if __name__ == '__main__':
     # Filter empty parameters
     params = dict(filter(lambda (k, v): v is not None, params.iteritems()))
 
-    endpoint = 'ws://{serv_host}:{serv_port}/wssh/{host}/{user}?{params}' \
+    endpoint = 'ws://{serv_host}:{serv_port}/dcps/{host}/{user}?{params}' \
         .format(
             serv_host=args.host,
             serv_port=args.port,
@@ -111,6 +111,6 @@ if __name__ == '__main__':
     try:
         client.invoke_shell(endpoint)
     except client.ConnectionError as e:
-        print >>sys.stderr, 'wssh: {0}'.format(e.message or 'Connection error')
+        print >>sys.stderr, 'dcps: {0}'.format(e.message or 'Connection error')
     else:
         print >>sys.stderr, 'Connection to {0} closed.'.format(hostname)
