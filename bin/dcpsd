@@ -7,10 +7,46 @@ from flask import Flask, request, abort, render_template
 from werkzeug.exceptions import BadRequest
 import gevent
 import dcps
+import pymongo
+from pymongo import MongoClient
 
 
 app = Flask(__name__)
 
+# route最后不能有‘/'，传入多个参数需要'&&'而不是'&'，字符串不能加双引号
+@app.route('/getInfo', methods=['POST', 'GET'])
+def getFields():
+    # get url params
+    # 传入的参数不能是u类型
+    url = request.args.get('url', 'localhost').encode()
+    port = request.args.get('port', '27017').encode()
+    db = request.args.get('db', 'admin').encode()
+    col = request.args.get('col', 'test').encode()
+    user = request.args.get('user', '').encode()
+    psw = request.args.get('psw', '').encode()
+
+    # 连接数据库
+    if user=='':
+        source_client=MongoClient("mongodb://%s:%s" % (url,port))
+    else:
+        source_client=MongoClient("mongodb://%s:%s@%s:%s" % (user, psw, url, port))
+    source_db=source_client[db]
+    source_col=source_db[col]
+
+    # 获得一个fields
+    keys = source_col.find_one().keys()
+    print keys
+    return str(keys)
+ 
+    # 获得fields
+    # 返回json格式
+
+
+
+    
+    
+    return 'adsfasdf'
+    
 
 @app.route('/')
 def index():

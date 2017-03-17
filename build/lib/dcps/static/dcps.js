@@ -1,9 +1,9 @@
 /*
-WSSH Javascript Client
+DCPS Javascript Client
 
 Usage:
 
-var client = new WSSHClient();
+var client = new DCPSClient();
 
 client.connect({
     // Connection and authentication parameters
@@ -22,7 +22,7 @@ client.connect({
         // Called after a successful connection to the server
         console.debug('Connected!');
 
-        client.send('ls\n'); // You can send data back to the server by using WSSHClient.send()
+        client.send('ls\n'); // You can send data back to the server by using DCPSClient.send()
     },
     onClose: function() {
         // Called when the remote closes the connection
@@ -36,17 +36,17 @@ client.connect({
 
 */
 
-function WSSHClient() {
+function DCPSClient() {
 };
 
-WSSHClient.prototype._generateEndpoint = function(options) {
+DCPSClient.prototype._generateEndpoint = function(options) {
     if (window.location.protocol == 'https:') {
         var protocol = 'wss://';
     } else {
         var protocol = 'ws://';
     }
     var endpoint = protocol + window.location.host +
-        '/wssh/' + encodeURIComponent(options.hostname) + '/' +
+        '/dcps/' + encodeURIComponent(options.hostname) + '/' +
         encodeURIComponent(options.username);
     if (options.authentication_method == 'password') {
         endpoint += '?password=' + encodeURIComponent(options.password) +
@@ -65,7 +65,7 @@ WSSHClient.prototype._generateEndpoint = function(options) {
     return endpoint;
 };
 
-WSSHClient.prototype.connect = function(options) {
+DCPSClient.prototype.connect = function(options) {
     var endpoint = this._generateEndpoint(options);
 
     if (window.WebSocket) {
@@ -98,6 +98,6 @@ WSSHClient.prototype.connect = function(options) {
     };
 };
 
-WSSHClient.prototype.send = function(data) {
+DCPSClient.prototype.send = function(data) {
     this._connection.send(JSON.stringify({'data': data}));
 };

@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 """
-wssh.server
+dcps.server
 
-This module provides server capabilities of wssh
+This module provides server capabilities of dcps
 """
 
 import gevent
@@ -27,11 +27,11 @@ except ImportError:
 from StringIO import StringIO
 
 
-class WSSHBridge(object):
+class DCPSBridge(object):
     """ WebSocket to SSH Bridge Server """
 
     def __init__(self, websocket):
-        """ Initialize a WSSH Bridge
+        """ Initialize a DCPS Bridge
 
         The websocket must be the one created by gevent-websocket
         """
@@ -81,7 +81,7 @@ class WSSHBridge(object):
                 load it using the passphrase
             * Agent
                 Authenticate using the *local* SSH agent. This is the
-                one running alongside wsshd on the server side.
+                one running alongside dcpsd on the server side.
         """
         try:
             pkey = None

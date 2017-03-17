@@ -27,20 +27,20 @@
                     <p> Created by <b>Gupern</b>, who is the Data Engineer of <b>CRAWWW</b> Company.</p>
                     <p>采用敏捷开发方法，先怼出核心功能<p>
                     <ol>
-                        <li>不需要转换js代码，直接显示python代码 ✔️ -- 通过写js脚本替换回来</li>
-                        <li>自动读取本地操作列表</li>
-                        <li>按connect后alert返回结果</li>
-                        <!--
+                        <li>js 读取本地文件 ✔️</li>
+                        <li>js读取本地操作列表 ✔️</li>
+                        <li>ajax:修改dcps的方法，添加返回链接结果的api</li>
+                        <li>写添加map的前端</li>
                         <li>按+号后添加一行</li>
                         <li>添加键值映射功能</li>
                         <li>修改operation的py代码</li>
                         <li>添加操作</li>
                         <li>逻辑缩进</li>
                         <li>返回服务器中的数据库和collections</li>
+                        <li>整合DataX</li>
                         <li>实现下拉菜单返回操作选项，返回数据库列表</li>
                         <li>processed - date - source_url 去重，增量导入</li>
                         <li>定时crontab, 且判断上次操作是否完成</li>
-                        -->
                     </ol>
 
                     <br>
@@ -72,7 +72,7 @@
 
                     <div class="control-group">
                         <label class="control-label">
-                            Authentication method
+                            Auth method
                         </label>
 
                         <div class="controls">
@@ -144,12 +144,9 @@
                         </div>
                     </div>
 
-                    <div class="form-actions">
-                        <button type="submit" class="btn btn-primary">
-                            Connect
-                        </button>
-                    </div>
-
+                    <button type="submit" class="btn btn-primary">
+                        连接到服务器
+                    </button>
                 </fieldset>
             </form>
 
@@ -194,7 +191,7 @@
                                     class="input-small"
                                     placeholder="User" />
                                 <span class="add-on">pwd</span><input
-                                    type="text"
+                                    type="password"
                                     id="source_password"
                                     class="input-small"
                                     placeholder="Password" />
@@ -234,7 +231,7 @@
                                     class="input-small"
                                     placeholder="User" />
                                 <span class="add-on">psw</span><input
-                                    type="text"
+                                    type="password"
                                     id="target_password"
                                     class="input-small"
                                     placeholder="Password" />
@@ -307,8 +304,10 @@
             </form>
 
             <!-- 放到form外面，否则点击按钮后会刷新页面 -->
-            <button class="btn btn-primary" onclick="myFunction('Gupern','CEO')">Click me</button>
-            <button class="btn btn-primary" onclick="operation_test()">operation test</button>
+            <button class="btn btn-primary" onclick="myFunction('Gupern','CEO')">生成连接数据库代码</button>
+            <button class="btn btn-primary" onclick="operation_test()">生成进行的操作</button>
+            <br>
+            <p>选择需要操作的文件:<input type="file" id='operationFile' style="background: rgba(250,250,250,0.8); border: 1px black;"></p>
 
         </div>
 
@@ -322,11 +321,11 @@
         </script>
         <script type="application/javascript" src="{{url_for('static', filename='term.js')}}">
         </script>
-        <script type="application/javascript" src="{{url_for('static', filename='wssh.js')}}">
+        <script type="application/javascript" src="{{url_for('static', filename='dcps.js')}}">
         </script>
         <script type="application/javascript">
             function openTerminal(options) {
-                var client = new WSSHClient();
+                var client = new DCPSClient();
                 var term = new Terminal(80, 24, function(key) {
                     client.send(key);
                 });
