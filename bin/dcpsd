@@ -3,28 +3,45 @@
 from gevent import monkey
 monkey.patch_all()
 
+import flask
 from flask import Flask, request, abort, render_template
 from werkzeug.exceptions import BadRequest
 import gevent
 import dcps
 import pymongo
 from pymongo import MongoClient
+import json
+from json import JSONEncoder
 
 
 app = Flask(__name__)
 
+# json化返回结果的类
+class PythonObjectEncoder(JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, (list, dict, str, unicode, int, float, bool, type(None))):
+            return JSONEncoder.default(self, obj)
+        return str(obj)
+
 # route最后不能有‘/'，传入多个参数需要'&&'而不是'&'，字符串不能加双引号
+# 暂时只返回所有的keys，以后可以增加新功能比如返回db、col的names
 @app.route('/getInfo', methods=['POST', 'GET'])
-def getFields():
+def getInfo():
     # get url params
     # 传入的参数不能是u类型
-    url = request.args.get('url', 'localhost').encode()
-    port = request.args.get('port', '27017').encode()
-    db = request.args.get('db', 'admin').encode()
-    col = request.args.get('col', 'test').encode()
-    user = request.args.get('user', '').encode()
-    psw = request.args.get('psw', '').encode()
+    url = request.args.get(u'url', u'localhost')
+    port = request.args.get(u'port', u'27017')
+    db = request.args.get(u'db', u'test')
+    col = request.args.get(u'col', u'restaurants')
+    print 'db: ' + str(db)
+    print 'col: ' + str(col)
 
+    user = request.args.get(u'user', u'')
+    psw = request.args.get(u'psw', u'')
+
+    print 'user: ' + str(user)
+    print 'psw: ' + str(psw)
+    
     # 连接数据库
     if user=='':
         source_client=MongoClient("mongodb://%s:%s" % (url,port))
@@ -33,20 +50,24 @@ def getFields():
     source_db=source_client[db]
     source_col=source_db[col]
 
-    # 获得一个fields
-    keys = source_col.find_one().keys()
-    print keys
-    return str(keys)
- 
+    # 获得keys
+    # keys = source_col.find_one().keys()
+    all_documents = source_col.find()
     # 获得fields
+    fields = set()
+    for d in all_documents:
+        keys = d.keys()
+        for i in keys:
+            fields.add(i)
+
     # 返回json格式
+    result = {
+            'status':'success',
+            'data': list(fields),
+            }
+    jsonstr = json.dumps(result, ensure_ascii=False, cls=PythonObjectEncoder)
+    return jsonstr
 
-
-
-    
-    
-    return 'adsfasdf'
-    
 
 @app.route('/')
 def index():

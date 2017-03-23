@@ -27,9 +27,9 @@
                     <p> Created by <b>Gupern</b>, who is the Data Engineer of <b>CRAWWW</b> Company.</p>
                     <p>采用敏捷开发方法，先怼出核心功能<p>
                     <ol>
-                        <li>js 读取本地文件 ✔️</li>
-                        <li>js读取本地操作列表 ✔️</li>
-                        <li>ajax:修改dcps的方法，添加返回链接结果的api</li>
+                        <li>从网页input中获取数据</li>
+                        <li>传到select按钮</li>
+                        <li>增量导入</li>
                         <li>写添加map的前端</li>
                         <li>按+号后添加一行</li>
                         <li>添加键值映射功能</li>
@@ -306,6 +306,8 @@
             <!-- 放到form外面，否则点击按钮后会刷新页面 -->
             <button class="btn btn-primary" onclick="myFunction('Gupern','CEO')">生成连接数据库代码</button>
             <button class="btn btn-primary" onclick="operation_test()">生成进行的操作</button>
+            <button class="btn btn-primary" id="getInfo">get info</button>
+
             <br>
             <p>选择需要操作的文件:<input type="file" id='operationFile' style="background: rgba(250,250,250,0.8); border: 1px black;"></p>
 
@@ -352,7 +354,28 @@
         </script>
 
         <script type='application/javascript'>
+            // 要在这个主函数$(document)中写代码
             $(document).ready(function() {
+                //获取getInfo数据, 跟flask写法一样
+                $('#getInfo').click(function(){
+                    $.get('/getInfo', 
+                        {
+                            db: 'test',
+                            col:'guidetrip1'
+                        },
+                        function(data) {
+                        alert("Data loaded: " + data);
+                    });
+                });
+                // post方法传参数 比较安全，后期修改
+                //$('#getInfo').click(function() {
+                //    $.post('/getInfo',
+                //        $('#)
+                //        function(data,status){
+                //            alert('Data: ' + data + '\nStatus: ' + status);
+                //        })
+                //});
+
                 $('#ssh').hide();
                 $('#private_key_authentication', '#connect').hide();
 

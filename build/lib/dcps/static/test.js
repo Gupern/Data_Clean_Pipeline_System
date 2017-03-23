@@ -38,7 +38,7 @@ function connect_url() {
     connect_code+="source_cursor=source_col.find()\r\n"
 
     if (target_username && target_password) {
-        connect_code+="source_client=MongoClient(\"mongodb://" + source_username + ':' + source_password + '@' + source_url + ':' + source_port + "\")\r\n"
+        connect_code+="target_client=MongoClient(\"mongodb://" + target_username + ':' + target_password + '@' + target_url + ':' + target_port + "\")\r\n"
     }
     else if (target_username && ! target_password) {
         alert('input target password, please')
@@ -50,8 +50,8 @@ function connect_url() {
         connect_code+="target_client=MongoClient(\"mongodb://" + target_url + ':' + target_port + "\")\r\n\r\n"
     }
 
-    connect_code+="target_db=source_client." + target_db + "\r\n"
-    connect_code+="target_col=source_db." + target_col + "\r\n\r\n"
+    connect_code+="target_db=target_client." + target_db + "\r\n"
+    connect_code+="target_col=target_db." + target_col + "\r\n\r\n"
     connect_code+="target_cursor=target_col.find()\r\n"
     return connect_code;
 
@@ -67,15 +67,22 @@ function operation_test() {
 
 
 // js读取本地文件
-function readLocalFile() {
-    $.get('/static/', function(data) {
-        alert('nnnnn');
-        alert(data);
-    });
-}
+//function readLocalFile() {
+//    $.get('/static/', function(data) {
+//        alert('nnnnn');
+//        alert(data);
+//    });
+//}
+// 获取getInfo数据
+//$(document).ready(function() {
+//    $('#getInfo').click(function(){
+//        alert('lalala');
+//    });
+//});
 
 // 连接mongodb
-function connectMongo() {
-    var MongoClient = require('mongodb').MongoClient,
-        assert = require('assert');
-}
+//function connectMongo() {
+//    var MongoClient = require('mongodb').MongoClient,
+//        assert = require('assert');
+//}
+
